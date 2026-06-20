@@ -1,16 +1,47 @@
-# React + Vite
+# Brand Foundry
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Startup branding assistant — React + Vite frontend with an Express/Node backend for AI-powered startup video and branding generation.
 
-Currently, two official plugins are available:
+Repository: https://github.com/shashwat702/Brand-Foundry
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Overview
 
-## React Compiler
+- Frontend: React + Vite (client app in `src/`)
+- Backend: Node/Express (server in `server/`)
+- Features: AI generation endpoints, Cloudinary integration, video/reel templates
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Quick start
 
-## Expanding the ESLint configuration
+1. Install dependencies (root and server):
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+cd server
+npm install
+cd ..
+```
+
+2. Create a `.env` file in the `server/` folder (see `server/.env.example`) and set the required keys (Cloudinary, DB, JWT_SECRET, etc.).
+
+3. Run the frontend and backend (two terminals):
+
+Frontend:
+```bash
+npm run dev
+```
+
+Backend (from `server/`):
+```bash
+node server.js
+```
+
+## Notes
+
+- Sensitive files such as `.env` should not be committed — ensure you update your `.gitignore` with the appropriate entries.
+- See `server/.env.example` for the env variables required by the backend.
+
+## Contributing
+
+PRs and issues are welcome.
+
+If you want me to add CI, a deployment workflow, or a GitHub release, tell me and I'll prepare the files.
