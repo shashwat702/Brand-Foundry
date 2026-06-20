@@ -35,13 +35,3 @@ Backend (from `server/`):
 node server.js
 ```
 
-## Notes
-
-- Sensitive files such as `.env` should not be committed — ensure you update your `.gitignore` with the appropriate entries.
-- See `server/.env.example` for the env variables required by the backend.
-
-## Contributing
-
-PRs and issues are welcome.
-
-If you want me to add CI, a deployment workflow, or a GitHub release, tell me and I'll prepare the files.
