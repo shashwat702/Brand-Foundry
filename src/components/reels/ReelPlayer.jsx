@@ -8,6 +8,7 @@ import {
   REEL_WIDTH,
   ReelAd,
 } from "../../remotion/ReelAd";
+import API_URL from "../../services/api";
 
 const EXPECTED_RENDER_VERSION = "reel-render-v5-edge-with-audio";
 
@@ -36,7 +37,7 @@ function ReelPlayer({
     setRenderError("");
 
     try {
-      const versionResponse = await axios.get("http://localhost:5000/api/video/version", {
+      const versionResponse = await axios.get(`${API_URL}/api/video/version`, {
         timeout: 10 * 1000,
       });
 
@@ -47,7 +48,7 @@ function ReelPlayer({
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/video/render",
+        `${API_URL}/api/video/render`,
         inputProps,
         {
           responseType: "blob",

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import BillboardPreview from "../components/BillboardPreview";
 import ReelPlayer from "../components/reels/ReelPlayer";
+import API_URL from "../services/api";
 
 const generationOptions = {
   slogan: {
@@ -78,7 +79,7 @@ function Generate() {
   useEffect(() => {
     if (!id) return;
 
-    axios.get(`http://localhost:5000/api/startups/${id}`)
+    axios.get(`${API_URL}/api/startups/${id}`)
       .then((response) => {
         const startup = response.data.startup;
         setStartupName(startup.startupName);
@@ -103,7 +104,7 @@ function Generate() {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/ai/${generationOptions[type].endpoint}`,
+        `${API_URL}/api/ai/${generationOptions[type].endpoint}`,
         {
           startupName,
           industry,

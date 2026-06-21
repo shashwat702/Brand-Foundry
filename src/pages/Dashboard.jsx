@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import API_URL from "../services/api";
 
 function Dashboard() {
   const [startups, setStartups] = useState([]);
@@ -18,7 +19,7 @@ function Dashboard() {
 
     const fetchStartups = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/startups", {
+        const response = await axios.get(`${API_URL}/api/startups`, {
           params: { userId: user._id },
         });
         setStartups(response.data.startups);

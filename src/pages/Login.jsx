@@ -3,15 +3,16 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import API_URL from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
-  const { user, login, logout } = useAuth();
+  const { user, login, logout, googleRedirectUri } = useAuth();
 
   const handleSuccess = async (credentialResponse) => {
     try {
       const googleUser = jwtDecode(credentialResponse.credential);
-      const response = await axios.post("http://localhost:5000/api/auth/google", googleUser);
+      const response = await axios.post(`${API_URL}/api/auth/google`, googleUser);
       login(response.data.user);
       navigate("/dashboard");
     } catch (error) {
@@ -22,6 +23,18 @@ function Login() {
   const handleLogout = () => {
     logout();
     navigate("/login");
+  };
+
+  const handleError = (err) => {
+    console.error("Google login error:", err);
+    const origin = window.location.origin;
+
+    alert(
+      "Google sign-in failed. Common cause: 'origin_mismatch'.\n" +
+        `Current origin: ${origin}\n` +
+        `Expected redirect URI (from config): ${googleRedirectUri || "(not set)"}\n\n` +
+        "Fix: In Google Cloud Console, add the current origin to 'Authorized JavaScript origins' and add the redirect URI to 'Authorized redirect URIs'. Also set the same VITE_GOOGLE_CLIENT_ID and VITE_GOOGLE_REDIRECT_URI in your Vercel environment variables."
+    );
   };
 
   return (
@@ -61,7 +74,7 @@ function Login() {
               <h2>Sign in to your workspace.</h2>
               <p>Continue building brand directions for your startups.</p>
               <div className="google-login-wrap">
-                <GoogleLogin onSuccess={handleSuccess} onError={() => console.error("Login failed")} />
+                <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
               </div>
               <p className="auth-fine-print">By continuing, you agree to keep things thoughtful and useful.</p>
             </>

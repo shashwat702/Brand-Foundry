@@ -4,6 +4,8 @@ import {
   useState,
 } from "react";
 
+import { GOOGLE_REDIRECT_URI } from "../services/api";
+
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -34,6 +36,7 @@ export function AuthProvider({ children }) {
         setUser,
         login,
         logout,
+        googleRedirectUri: GOOGLE_REDIRECT_URI,
       }}
     >
       {children}

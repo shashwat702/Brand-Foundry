@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import API_URL from "../services/api";
 
 function CreateStartup() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ function CreateStartup() {
         startupData.append("logo", logo);
       }
 
-      await axios.post("http://localhost:5000/api/startups", startupData);
+      await axios.post(`${API_URL}/api/startups`, startupData);
       setMessage("Startup created successfully. Opening your dashboard…");
       setTimeout(() => navigate("/dashboard"), 700);
     } catch (error) {
